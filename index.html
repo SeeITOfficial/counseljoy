@@ -37,12 +37,24 @@
       left: 0;
       right: 0;
       height: 90px;
+
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 60px;
-      background: rgba(0,0,0,0.85);
+
+      background: rgba(10, 10, 9, 0.15); /* 🔥 lighter = real glass */
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+
       z-index: 999;
+    }
+    /* on scroll = slightly darker */
+    .nav-new.scrolled {
+      background: rgba(10, 10, 9, 0.45);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
     .nav-left, .nav-right {
@@ -56,7 +68,7 @@
       font-size: 12px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255,255,255,0.85);
       text-decoration: none;
     }
 
@@ -69,7 +81,7 @@
     .nav-center-logo {
       position: absolute;
       left: 50%;
-      transform: translateX(-50%) scale(1.5);
+      transform: translateX(-50%);
 
       top: 0; /* 🔥 better alignment */
 
@@ -135,11 +147,21 @@
 
     /* ── HERO ── */
     .hero-new {
-      height: 100vh;
+      height: calc(100vh - 90px);
       position: relative;
       overflow: hidden;
       margin-top: 90px;
-      
+      min-height: 700px;
+    }
+    .stats-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-top: 1px solid rgba(201,150,58,0.3);
+      background: rgba(0,0,0,0.85); /* important for readability */
+      backdrop-filter: blur(6px);
+      z-index: 5;
     }
 
     .hero-new::before {
@@ -171,6 +193,7 @@
 
     .hero-content {
       position: relative;
+      padding-bottom: 110px;
       z-index: 2;
       max-width: 800px;              /* control width */
       margin: 0 auto;                /* 🔥 true horizontal centering */
@@ -561,8 +584,8 @@
       font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;
       color:var(--gold);padding-top:3px;
     }
-    .cred-val-title{font-size:14px;font-weight:500;color:var(--white);margin-bottom:3px}
-    .cred-val-sub{font-size:13px;font-weight:300;color:rgba(255,255,255,0.35)}
+    .cred-val-title{font-size:16px;font-weight:500;color:var(--white);margin-bottom:3px}
+    .cred-val-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,0.35)}
 
     /* ── INSIGHTS ── */
     .insights-grid{
@@ -725,58 +748,132 @@
     .footer-loc{font-size:12px;font-weight:300;color:rgba(255,255,255,0.18)}
 
     /* ── STICKY WA ── */
+    
+
     .wa-float {
       position: fixed;
-      bottom: 28px;
+      bottom: 40px;
       right: 28px;
       z-index: 9999;
 
-      display: flex;
-      align-items: center;
-      justify-content: center; /* 🔥 center icon */
-
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: #1FAD58;
-
-      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
       transition: all 0.3s ease;
 
-      padding: 0;
-    }
+      display: flex;
+      align-items: center;
+      gap: 12px;
 
-    /* ICON */
-    .wa-float svg {
-      width: 22px;
-      height: 22px;
-      flex-shrink: 0;
-    }
+      background: #1FAD58;
+      color: white;
 
-    /* TEXT */
-    .wa-float-lbl {
-      opacity: 0;
-      white-space: nowrap;
-      margin-left: 10px;
-      font-size: 11px;
-      letter-spacing: 0.05em;
-      transition: opacity 0.3s ease;
-    }
+      padding: 14px 18px;
+      border-radius: 6px;
 
-    /* 🔥 HOVER EXPAND */
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 400;
+
+      text-decoration: none;
+
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
     .wa-float:hover {
-      width: 180px;
-      height: 56px; /* keep height fixed */
-      border-radius: 14px;
-
-      justify-content: flex-start; /* 🔥 shift icon left */
-      padding-left: 16px;
+      transform: none !important;
+      background: #1FAD58 !important;
+    }
+    .wa-float-lbl {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
     }
 
-    /* SHOW TEXT */
-    .wa-float:hover .wa-float-lbl {
+    .wa-float-lbl span {
+      display: block;
+    }
+    .wa-float svg {
+      width: 25px;
+      height: 25px;
+    }
+    .wa-float.show {
       opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
     }
+
+
+    .contact-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+    }
+
+    .contact-box {
+      background: #111;
+      padding: 30px;
+      border-radius: 8px;
+      width: 320px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .contact-box h3 {
+      margin-bottom: 10px;
+    }
+
+    .contact-box button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      background: #C9963A;
+      border: none;
+      color: black;
+      cursor: pointer;
+    }
+
+    .close {
+      display: block;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    .contact-box {
+      transform: translateY(20px);
+      opacity: 0;
+      animation: modalIn 0.25s ease forwards;
+    }
+
+    @keyframes modalIn {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .contact-input {
+      width: 100%;
+      margin: 12px 0 16px;
+      padding: 12px;
+      background: #0f0f0f;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #fff;
+      border-radius: 6px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .contact-input:focus {
+      border-color: #C9963A;
+    }
+    
+
+    
     /* ── MOBILE ── */
     @media(max-width:1000px){
       nav{padding:0 24px}
@@ -872,26 +969,176 @@
 
     </div>
   </div>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+
+    <div class="stat-cell fade">
+      <div class="stat-n">LLB</div>
+      <div class="stat-l">
+        Uganda Christian University
+      </div>
+    </div>
+
+    <div class="stat-cell fade" style="transition-delay:.06s">
+      <div class="stat-n">BAR</div>
+      <div class="stat-l">
+        Law Development Centre
+      </div>
+    </div>
+
+    <div class="stat-cell fade" style="transition-delay:.12s">
+      <div class="stat-n">LLM</div>
+      <div class="stat-l">
+        Kampala International University
+      </div>
+    </div>
+
+    <div class="stat-cell fade" style="transition-delay:.18s">
+      <div class="stat-n">PGD</div>
+      <div class="stat-l">
+        Finance · Team University
+      </div>
+    </div>
+
+  </div>
 </section>
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stat-cell fade">
-    <div class="stat-n">LLB</div>
-    <div class="stat-l">Bachelor of Laws<br>Uganda Christian University</div>
-  </div>
-  <div class="stat-cell fade" style="transition-delay:.06s">
-    <div class="stat-n">BAR</div>
-    <div class="stat-l">Admitted to<br>the Uganda Bar</div>
-  </div>
-  <div class="stat-cell fade" style="transition-delay:.12s">
-    <div class="stat-n">6</div>
-    <div class="stat-l">Areas of Law<br>Full Coverage</div>
-  </div>
-  <div class="stat-cell fade" style="transition-delay:.18s">
-    <div class="stat-n">UG</div>
-    <div class="stat-l">Nationwide<br>Based in Kampala</div>
+
+
+<!-- ABOUT -->
+<div id="about">
+  <div class="sec">
+    <div class="about-layout">
+
+      <!-- LEFT -->
+      <div class="fade">
+        <div class="sec-hd">
+          <span class="sec-tag">About</span>
+          <h2 class="sec-title">Nakiwala Joy <em>Kimbowa</em></h2>
+        </div>
+
+        <div class="about-body">
+          <p>I am <strong>Nakiwala Joy Kimbowa</strong>, a qualified Ugandan advocate admitted to the Uganda Bar, with a general practice spanning civil, criminal, commercial, family, and property law.</p>
+
+          <p>I entered the law with a clear conviction: too many Ugandans lose land cases, custody battles, and business disputes not because the law is against them, but because no one shows up to argue it properly.</p>
+
+          <div class="about-pull">
+            "I do not take cases to manage them. I take them to resolve them."
+          </div>
+
+          <p>Based in Kampala, I handle every matter personally — no handoffs, no junior file management. From the first consultation to the final court date, your case is mine.</p>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="fade" style="transition-delay:.12s">
+        <div class="sec-hd">
+          <span class="sec-tag">Qualifications</span>
+          <h2 class="sec-title" style="font-size:28px">
+            Training & <em>Credentials</em>
+          </h2>
+        </div>
+
+        <div class="cred-table">
+
+          <div class="cred-row">
+            <div class="cred-key">LLB</div>
+            <div>
+              <div class="cred-val-title">Bachelor of Laws</div>
+              <div class="cred-val-sub">Uganda Christian University</div>
+            </div>
+          </div>
+
+          <div class="cred-row">
+            <div class="cred-key">Bar</div>
+            <div>
+              <div class="cred-val-title">Post Graduate Bar Course in Legal Practice</div>
+              <div class="cred-val-sub">Law Development Centre</div>
+            </div>
+          </div>
+
+          <div class="cred-row">
+            <div class="cred-key">LLM</div>
+            <div>
+              <div class="cred-val-title">Master of Laws</div>
+              <div class="cred-val-sub">Kampala International University</div>
+            </div>
+          </div>
+
+          <div class="cred-row">
+            <div class="cred-key">PGD</div>
+            <div>
+              <div class="cred-val-title">Postgraduate Diploma in Finance</div>
+              <div class="cred-val-sub">Team University</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
+
+<div class="gold-rule"></div>
+
+
+<!-- PRACTICE AREAS -->
+<div id="practice">
+  <div class="sec">
+    <div class="sec-hd fade">
+      <span class="sec-tag">Legal Services</span>
+      <h2 class="sec-title">Practice <em>Areas</em></h2>
+    </div>
+
+    <div class="pa-grid fade">
+
+      <div class="pa-item">
+        <div class="pa-num">01 — Family & Matrimonial</div>
+        <div class="pa-name">Family & Matrimonial Law</div>
+        <div class="pa-body">Secure child custody. Enforce maintenance. Navigate divorce. Obtain protection orders. Every family matter handled with total discretion and decisive court representation. You do not have to face this alone.</div>
+        <button class="pa-cta" onclick="openContactOptions('Family & Matrimonial Law')">Get Legal Help →</button>
+      </div>
+
+      <div class="pa-item">
+        <div class="pa-num">02 — Land & Property</div>
+        <div class="pa-name">Land & Property Law</div>
+        <div class="pa-body">Win title disputes. Stop illegal evictions. Execute clean property transfers. Ugandan land law is layered and unforgiving, know exactly where you stand before signing anything or vacating anything.</div>
+        <button class="pa-cta" onclick="openContactOptions('Land & Property Law')">Get Legal Help →</button>
+      </div>
+
+      <div class="pa-item">
+        <div class="pa-num">03 — Commercial</div>
+        <div class="pa-name">Commercial & Business Law</div>
+        <div class="pa-body">Contracts that protect your interests. Business structures that limit liability. Shareholder agreements that hold. Built for Ugandan SMEs who need solid legal backing without an in-house counsel budget.</div>
+        <button class="pa-cta" onclick="openContactOptions('Commercial & Business Law')">Get Legal Help →</button>
+      </div>
+
+      <div class="pa-item">
+        <div class="pa-num">04 — Civil Litigation</div>
+        <div class="pa-name">Civil Litigation</div>
+        <div class="pa-body">Pursue debt recovery. Enforce contracts. Claim damages. Obtain urgent injunctions. From magistrate court to the High Court, prepared, argued, and followed through to judgment.</div>
+        <button class="pa-cta" onclick="openContactOptions('Civil Litigation')">Get Legal Help →</button>
+      </div>
+
+      <div class="pa-item">
+        <div class="pa-num">05 — Criminal Defense</div>
+        <div class="pa-name">Criminal Defense</div>
+        <div class="pa-body">Immediate bail applications. Rigorous trial defense. Your rights protected at every stage. No case is treated as routine, every client receives the full weight of prepared, strategic advocacy.</div>
+        <button class="pa-cta" onclick="openContactOptions('Criminal Defense')">Get Legal Help →</button>
+      </div>
+
+      <div class="pa-item">
+        <div class="pa-num">06 — Wills & Succession</div>
+        <div class="pa-name">Wills & Succession</div>
+        <div class="pa-body">Draft a valid will. Apply for probate. Administer an estate. Challenge an unfair distribution. Protect what you have built and ensure it reaches the right people when it matters most.</div>
+        <button class="pa-cta" onclick="openContactOptions('Wills & Succession')">Get Legal Help →</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
 <!-- WHY CHOOSE -->
 <div class="sec-alt">
@@ -935,105 +1182,7 @@
   </div>
 </div>
 
-<!-- PRACTICE AREAS -->
-<div id="practice">
-  <div class="sec">
-    <div class="sec-hd fade">
-      <span class="sec-tag">Legal Services</span>
-      <h2 class="sec-title">Practice <em>Areas</em></h2>
-    </div>
-    <div class="pa-grid fade">
-      <div class="pa-item">
-        <div class="pa-num">01 — Family & Matrimonial</div>
-        <div class="pa-name">Family & Matrimonial Law</div>
-        <div class="pa-body">Secure child custody. Enforce maintenance. Navigate divorce. Obtain protection orders. Every family matter handled with total discretion and decisive court representation. You do not have to face this alone.</div>
-        <button class="pa-cta" onclick="openWA('Family & Matrimonial Law')">Get Legal Help <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-      </div>
-      <div class="pa-item">
-        <div class="pa-num">02 — Land & Property</div>
-        <div class="pa-name">Land & Property Law</div>
-        <div class="pa-body">Win title disputes. Stop illegal evictions. Execute clean property transfers. Ugandan land law is layered and unforgiving, know exactly where you stand before signing anything or vacating anything.</div>
-        <button class="pa-cta" onclick="openWA('Land & Property Law')">Get Legal Help <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-      </div>
-      <div class="pa-item">
-        <div class="pa-num">03 — Commercial</div>
-        <div class="pa-name">Commercial & Business Law</div>
-        <div class="pa-body">Contracts that protect your interests. Business structures that limit liability. Shareholder agreements that hold. Built for Ugandan SMEs who need solid legal backing without an in-house counsel budget.</div>
-        <button class="pa-cta" onclick="openWA('Commercial & Business Law')">Get Legal Help <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-      </div>
-      <div class="pa-item">
-        <div class="pa-num">04 — Civil Litigation</div>
-        <div class="pa-name">Civil Litigation</div>
-        <div class="pa-body">Pursue debt recovery. Enforce contracts. Claim damages. Obtain urgent injunctions. From magistrate court to the High Court, prepared, argued, and followed through to judgment.</div>
-        <button class="pa-cta" onclick="openWA('Civil Litigation')">Get Legal Help <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-      </div>
-      <div class="pa-item">
-        <div class="pa-num">05 — Criminal Defense</div>
-        <div class="pa-name">Criminal Defense</div>
-        <div class="pa-body">Immediate bail applications. Rigorous trial defense. Your rights protected at every stage. No case is treated as routine, every client receives the full weight of prepared, strategic advocacy.</div>
-        <button class="pa-cta" onclick="openWA('Criminal Defense')">Get Legal Help <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-      </div>
-      <div class="pa-item">
-        <div class="pa-num">06 — Wills & Succession</div>
-        <div class="pa-name">Wills & Succession</div>
-        <div class="pa-body">Draft a valid will. Apply for probate. Administer an estate. Challenge an unfair distribution. Protect what you have built and ensure it reaches the right people when it matters most.</div>
-        <button class="pa-cta" onclick="openWA('Wills & Succession')">Get Legal Help <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
-      </div>
-    </div>
-  </div>
-</div>
 
-<div class="gold-rule"></div>
-
-<!-- ABOUT -->
-<div id="about">
-  <div class="sec">
-    <div class="about-layout">
-      <div class="fade">
-        <div class="sec-hd">
-          <span class="sec-tag">About</span>
-          <h2 class="sec-title">Nakiwala Joy <em>Kimbowa</em></h2>
-        </div>
-        <div class="about-body">
-          <p><strong>Nakiwala Joy Kimbowa</strong> is a qualified Ugandan advocate admitted to the Uganda Bar, with a general practice spanning civil, criminal, commercial, family, and property law.</p>
-          <p>She entered the law with a clear conviction: that too many Ugandans lose land cases, custody battles, and business disputes not because the law is against them, but because no one showed up to argue it properly. That changes when you instruct Nakiwala.</p>
-          <div class="about-pull">"I do not take cases to manage them. I take them to resolve them."</div>
-          <p>Based in Kampala, she handles matters personally — no handoffs, no junior file management. From the first consultation to the last court date, your case is hers.</p>
-        </div>
-      </div>
-      <div class="fade" style="transition-delay:.12s">
-        <div class="sec-hd">
-          <span class="sec-tag">Qualifications</span>
-          <h2 class="sec-title" style="font-size:28px">Training & <em>Credentials</em></h2>
-        </div>
-        <div class="cred-table">
-          <div class="cred-row">
-            <div class="cred-key">LLB</div>
-            <div><div class="cred-val-title">Bachelor of Laws (LLB)</div><div class="cred-val-sub">Makerere University, Kampala</div></div>
-          </div>
-          <div class="cred-row">
-            <div class="cred-key">LDC</div>
-            <div><div class="cred-val-title">Postgraduate Diploma in Legal Practice</div><div class="cred-val-sub">Law Development Centre, Kampala</div></div>
-          </div>
-          <div class="cred-row">
-            <div class="cred-key">BAR</div>
-            <div><div class="cred-val-title">Admitted to the Uganda Bar</div><div class="cred-val-sub">Advocate of the High Court of Uganda</div></div>
-          </div>
-          <div class="cred-row">
-            <div class="cred-key">Practice</div>
-            <div><div class="cred-val-title">General Practice</div><div class="cred-val-sub">Civil · Criminal · Commercial · Family · Land · Succession</div></div>
-          </div>
-          <div class="cred-row">
-            <div class="cred-key">Location</div>
-            <div><div class="cred-val-title">Kampala, Uganda</div><div class="cred-val-sub">Available nationwide across Uganda's court system</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="gold-rule"></div>
 
 <!-- LEGAL INSIGHTS -->
 <div class="sec-dark">
@@ -1231,68 +1380,212 @@
   </svg>
 
   <!-- TEXT also inside -->
-  <span class="wa-float-lbl">Chat with Advocate</span>
+  <span class="wa-float-lbl">Talk to Advocate</span>
 
 </a>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-  // Nav scroll behavior
-  const nav = document.querySelector('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 80) {
-      nav.style.background = 'rgba(10,10,9,0.96)';
-      nav.style.borderBottom = '1px solid rgba(255,255,255,0.08)';
-    } else {
-      nav.style.background = 'rgba(10,10,9,0.0)';
-      nav.style.borderBottom = 'none';
+const nav = document.querySelector('nav');
+
+let selectedCategory = "";
+let selectedAction = ""; // 'whatsapp' or 'email'
+
+// OPEN MAIN MODAL
+function openContactOptions(category) {
+  selectedCategory = category;
+  document.getElementById('contactCategory').innerText = category;
+  document.getElementById('contactModal').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('contactModal').style.display = 'none';
+}
+
+function closeDetailsModal() {
+  document.getElementById('detailsModal').style.display = 'none';
+}
+
+// CALL
+function handleCall() {
+  closeModal();
+  window.location.href = "tel:+256700175904";
+}
+
+// NAV SCROLL
+window.addEventListener('scroll', () => {
+  if (!nav) return;
+  nav.classList.toggle('scrolled', window.scrollY > 80);
+});
+
+// START WHATSAPP FLOW
+function startWhatsApp() {
+  selectedAction = "whatsapp";
+  closeModal();
+
+  const contactField = document.getElementById('contactField');
+  if (contactField) contactField.style.display = 'none';
+
+  document.getElementById('userContact').value = '';
+
+  document.getElementById('detailsModal').style.display = 'flex';
+}
+
+// START EMAIL FLOW
+function startEmail() {
+  selectedAction = "email";
+  closeModal();
+
+  const contactField = document.getElementById('contactField');
+  if (contactField) contactField.style.display = 'block';
+
+  document.getElementById('detailsModal').style.display = 'flex';
+}
+
+// SUBMIT DETAILS
+function submitDetails() {
+  const nameEl = document.getElementById('userName');
+  const contactEl = document.getElementById('userContact');
+  const addressEl = document.getElementById('userAddress');
+
+  const name = nameEl.value.trim();
+  const contact = contactEl.value.trim();
+  const address = addressEl.value.trim();
+
+  [nameEl, contactEl, addressEl].forEach(el => el.style.borderColor = '');
+
+  let hasError = false;
+
+  // NAME
+  if (name.length < 3) {
+    nameEl.style.borderColor = 'red';
+    hasError = true;
+  }
+
+  // ADDRESS
+  if (address.length < 5) {
+    addressEl.style.borderColor = 'red';
+    hasError = true;
+  }
+
+  // EMAIL ONLY → validate contact
+  if (selectedAction === "email") {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const phoneRegex = /^07\d{8}$/;
+
+    const cleanContact = contact.replace(/\s+/g, '');
+
+    if (!emailRegex.test(contact) && !phoneRegex.test(cleanContact)) {
+      contactEl.style.borderColor = 'red';
+      alert("Enter valid email or Ugandan phone (07XXXXXXXX)");
+      return;
     }
+  }
+
+  if (hasError) {
+    alert("Fill all required fields correctly.");
+    return;
+  }
+
+  closeDetailsModal();
+
+  if (selectedAction === "whatsapp") {
+    sendWhatsApp(name, address);
+  } else {
+    const cleanContact = contact.replace(/\s+/g, '');
+    sendEmail(name, cleanContact, address);
+  }
+}
+
+// WHATSAPP
+function sendWhatsApp(name, address) {
+  const msg = encodeURIComponent(
+`Hello Advocate Nakiwala,
+
+My name is ${name}.
+Address: ${address}
+
+I need legal assistance regarding ${selectedCategory}.`
+  );
+
+  window.open(`https://wa.me/256700175904?text=${msg}`, '_blank');
+}
+
+// EMAIL
+function sendEmail(name, contact, address) {
+  const subject = encodeURIComponent(
+    `${selectedCategory} - Legal Assistance Request`
+  );
+
+  const body = encodeURIComponent(
+`JOY ADVOCATES
+Advocate & Legal Counsel
+Kampala, Uganda
+----------------------------------
+
+Dear Advocate Nakiwala,
+
+My name is ${name}
+Contact: ${contact}
+Address: ${address}
+
+I am seeking legal assistance regarding ${selectedCategory}.
+
+I would appreciate your guidance.
+
+Kind regards,
+${name}`
+  );
+
+  window.open(
+    `https://mail.google.com/mail/?view=cm&fs=1&to=nakjoie3nakiwala@yahoo.com&su=${subject}&body=${body}`,
+    '_blank'
+  );
+}
+
+// FADE ANIMATION
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('in');
   });
+},{threshold:0.07,rootMargin:'0px 0px -28px 0px'});
 
-  // Scroll fade
-  const obs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')});
-  },{threshold:0.07,rootMargin:'0px 0px -28px 0px'});
-  document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
 
-  // Mobile nav
-  function toggleNav(){
-    const nl=document.getElementById('navLinks');
-    const open=nl.dataset.open==='1';
-    if(open){
-      nl.removeAttribute('style');nl.dataset.open='0';
-    } else {
-      Object.assign(nl.style,{
-        display:'flex',flexDirection:'column',
-        position:'fixed',top:'68px',left:0,right:0,
-        background:'rgba(10,10,9,0.98)',
-        padding:'1.5rem 24px 2rem',
-        borderBottom:'1px solid rgba(255,255,255,0.08)',
-        gap:'1.5rem',zIndex:'199',
-        backdropFilter:'blur(16px)'
-      });
-      nl.dataset.open='1';
-    }
-  }
+// FLOAT BUTTON
+const waBtn = document.querySelector('.wa-float');
 
-  // Practice CTA
-  function openWA(area){
-    const text = encodeURIComponent(
-      `Hello Advocate Nakiwala, I need legal assistance with ${area}.`
-    );
-    window.open(`https://wa.me/256700175904?text=${text}`, '_blank');
-  }
-
-  // Form submit → WhatsApp
-  function handleSubmit(){
-    const fn=document.getElementById('ff').value.trim();
-    const ln=document.getElementById('fl').value.trim();
-    const ph=document.getElementById('fp').value.trim();
-    const mt=document.getElementById('fm').value;
-    const dc=document.getElementById('fd').value.trim();
-    if(!fn||!ph||!mt){alert('Please fill in your name, phone number, and matter type.');return;}
-    const msg=encodeURIComponent(`Hello Advocate Nakiwala,\n\nMy name is ${fn} ${ln}.\nPhone: ${ph}\nMatter: ${mt}\n\n${dc||'I would like to book a consultation.'}`);
-    window.open(`https://wa.me/256700175904?text=${msg}`,'_blank');
-  }
+window.addEventListener('scroll', () => {
+  if (!waBtn) return;
+  waBtn.classList.toggle('show', window.scrollY > window.innerHeight * 0.6);
+});
 </script>
+<div id="contactModal" class="contact-modal">
+  <div class="contact-box">
+    <h3>Contact Advocate</h3>
+    <p id="contactCategory"></p>
+
+    <button onclick="startWhatsApp()">💬 WhatsApp</button>
+    <button onclick="startEmail()">✉️ Email</button>
+    <button onclick="handleCall()">📞 Call</button>
+
+    <span class="close" onclick="closeModal()">×</span>
+  </div>
+</div>
+
+<div id="detailsModal" class="contact-modal">
+  <div class="contact-box">
+    <h3>Your Details</h3>
+
+    <input type="text" id="userName" placeholder="Your Name" class="contact-input" required>
+    <input type="text" id="userContact" placeholder="Phone" class="contact-input">
+    <input type="text" id="userAddress" placeholder="Full Address" class="contact-input" required>
+
+    <button onclick="submitDetails()">Continue →</button>
+
+    <span class="close" onclick="closeDetailsModal()">×</span>
+  </div>
+</div>
+
 </body>
 </html>
