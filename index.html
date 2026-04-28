@@ -826,7 +826,7 @@
       .hero{grid-template-columns:1fr}
       .hero > div:first-child{padding:120px 24px 140px;border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
       .hero-new{height:auto;min-height:100svh}
-      .hero-content{padding:120px 24px 140px;max-width:100%}
+      .hero-content{padding:60px 24px 80px;max-width:100%;transform:none}
       .hero h1{font-size:clamp(36px,8vw,56px)}
       .hero-desc{white-space:normal}
       .hero-line{width:90%;border-right:none}
@@ -834,6 +834,7 @@
       .hero-stat-row{border-top:none;border-bottom:1px solid rgba(255,255,255,0.06)}
       .hero-advocate{display:none}
       .hero-float-badge{display:none}
+      .nav-center-logo img{width:60px}
 
       /* STATS BAR IN HERO */
       .stats-bar{grid-template-columns:repeat(2,1fr)}
@@ -896,8 +897,9 @@
       .footer-inner{flex-direction:column;text-align:center;gap:8px;padding:24px}
 
       /* WA FLOAT BUTTON */
-      .wa-float{width:52px;height:52px;border-radius:50%;padding:0}
+      .wa-float{width:52px;height:52px;border-radius:50%;padding:0;align-items:center;justify-content:center;gap:0}
       .wa-float-lbl{display:none}
+      .wa-float svg{width:24px;height:24px}
 
       /* TYPOGRAPHY */
       .sec-title{font-size:clamp(28px,7vw,40px)}
@@ -919,6 +921,11 @@
       .hero-stat-row{grid-template-columns:1fr 1fr}
       .hero-stat-cell{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
       .hero-stat-cell:last-child{border-bottom:none}
+
+      /* HERO - compress for iPhone */
+      .hero-content{padding:50px 20px 60px}
+      .hero-line{margin:12px auto}
+      .hero-subtitle{margin:8px 0}
 
       /* WHY GRID */
       .why-grid{grid-template-columns:1fr}
@@ -953,6 +960,10 @@
 
       /* SECTION PADDING */
       .sec{padding:52px 16px}
+
+      /* WA FLOAT BUTTON */
+      .wa-float{width:52px;height:52px;border-radius:50%;padding:0;align-items:center;justify-content:center;gap:0}
+      .wa-float svg{width:24px;height:24px}
 
       /* TYPOGRAPHY */
       .sec-title{font-size:clamp(28px,7vw,40px)}
@@ -1650,7 +1661,7 @@ function sendEmail(name, phone, email, address) {
     matter_type: selectedCategory
   })
   .then(() => {
-    alert("✅ Your inquiry has been sent! Expect a response within 24 hours.");
+    alert("Joy Advocates says:\n\n✅ Your inquiry has been sent! Expect a response within 24 hours.");
   })
   .catch(err => {
     console.error("EmailJS error:", err);
