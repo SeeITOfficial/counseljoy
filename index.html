@@ -825,23 +825,21 @@
       /* HERO */
       .hero{grid-template-columns:1fr}
       .hero > div:first-child{padding:120px 24px 140px;border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
-      .hero-new{min-height:100svh;height:auto}
-      .hero-overlay{padding-top:80px;padding-bottom:120px;align-items:flex-start}
-      .hero-content{padding-top:0;padding-bottom:80px;transform:none;margin-top:0;max-width:100%}
-      .hero-line{width:80%;margin:12px auto;border-right:none}
-      .hero-new h1{font-size:clamp(28px,7vw,42px);letter-spacing:2px;margin-bottom:6px}
-      .hero-subtitle{font-size:13px;letter-spacing:2px;margin:6px 0}
-      .hero-desc{font-size:14px;margin-top:10px;white-space:normal;line-height:1.6}
-      .hero-btn{margin-top:18px;padding:12px 24px;font-size:14px}
+      .hero-new{height:auto;min-height:100svh}
+      .hero-content{padding:60px 24px 80px;max-width:100%;transform:none}
+      .hero h1{font-size:clamp(36px,8vw,56px)}
+      .hero-desc{white-space:normal}
+      .hero-line{width:90%;border-right:none}
       .hero-right{order:-1}
       .hero-stat-row{border-top:none;border-bottom:1px solid rgba(255,255,255,0.06)}
       .hero-advocate{display:none}
       .hero-float-badge{display:none}
       .nav-center-logo img{width:60px}
-      .stats-bar{position:relative;grid-template-columns:repeat(2,1fr)}
-      .stat-cell{padding:14px 10px}
-      .stat-n{font-size:26px}
-      .stat-l{font-size:9px;letter-spacing:0.06em}
+
+      /* STATS BAR IN HERO */
+      .stats-bar{grid-template-columns:repeat(2,1fr)}
+      .stat-cell{padding:16px 12px}
+      .stat-n{font-size:28px}
 
       /* SECTION PADDING */
       .sec{padding:64px 24px}
@@ -910,13 +908,6 @@
       .about-pull{font-size:17px}
       .insight-title{font-size:16px}
       .testi-quote{font-size:15px}
-    }
-    @media(max-width:480px){
-      .hero-new h1{font-size:clamp(24px,6.5vw,36px);letter-spacing:1.5px}
-      .hero-overlay{padding-top:60px;padding-bottom:100px}
-      .stat-n{font-size:22px}
-      .stat-l{font-size:8.5px}
-      .stat-cell{padding:12px 8px}
     }
     @media(max-width:600px){
       /* STATS BAR */
