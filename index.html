@@ -826,7 +826,7 @@
       /* HERO */
       .hero{grid-template-columns:1fr}
       .hero > div:first-child{padding:120px 24px 140px;border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
-      .hero-new{height:auto;min-height:100svh}
+      .hero-new{height:auto;min-height:100svh;display:flex;flex-direction:column}
       .hero-content{padding:60px 24px 80px;max-width:100%;transform:none; margin-top: 0;}
       .hero h1{font-size:clamp(36px,8vw,56px)}
       .hero-desc{white-space:normal}
@@ -838,10 +838,9 @@
       .nav-center-logo img{width:80px}
 
       /* STATS BAR IN HERO */
-      .stats-bar{grid-template-columns:repeat(2,1fr)}
+      .stats-bar{grid-template-columns:repeat(2,1fr);position:relative;bottom:auto;margin-top:auto}
       .stat-cell{padding:16px 12px}
       .stat-n{font-size:28px}
-      .stats-bar{bottom: 80px;}
 
       /* SECTION PADDING */
       .sec{padding:64px 24px}
