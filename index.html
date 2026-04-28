@@ -13,6 +13,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{overflow-x:hidden}
+    img,svg{max-width:100%}
     :root{
       --ink:#0A0A09;
       --ink2:#111110;
@@ -216,7 +218,7 @@
       font-size: clamp(32px, 4vw, 56px);
       letter-spacing: 3px;
       text-transform: uppercase;
-      white-space: nowrap;
+      white-space: normal;
       text-align: center;
       font-weight: 500;
     }
@@ -243,7 +245,7 @@
       line-height: 2;
       font-weight: 300;
 
-      white-space: nowrap;        /* 🔥 force single line */
+      white-space: normal;
     }
 
     .hero-btn {
@@ -814,48 +816,158 @@
     
     /* ── MOBILE ── */
     @media(max-width:1000px){
-      nav{padding:0 24px}
-      .nav-links{display:none}
+      /* NAV */
+      .nav-new{height:68px;padding:0 24px}
+      .nav-left,.nav-right{display:none}
       .hamburger{display:flex}
+      .nav-center-logo{padding:16px 32px}
+
+      /* HERO */
       .hero{grid-template-columns:1fr}
-      .hero > div:first-child{padding:100px 24px 60px;border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
+      .hero > div:first-child{padding:120px 24px 140px;border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
+      .hero-new{height:auto;min-height:100svh}
+      .hero-content{padding:120px 24px 140px;max-width:100%}
+      .hero h1{font-size:clamp(36px,8vw,56px)}
+      .hero-desc{white-space:normal}
+      .hero-line{width:90%;border-right:none}
       .hero-right{order:-1}
       .hero-stat-row{border-top:none;border-bottom:1px solid rgba(255,255,255,0.06)}
       .hero-advocate{display:none}
       .hero-float-badge{display:none}
+
+      /* STATS BAR IN HERO */
       .stats-bar{grid-template-columns:repeat(2,1fr)}
-      .sec{padding:72px 24px}
+      .stat-cell{padding:16px 12px}
+      .stat-n{font-size:28px}
+
+      /* SECTION PADDING */
+      .sec{padding:64px 24px}
       .gold-rule{margin:0 24px}
-      .why-grid{grid-template-columns:1fr}
-      .why-item{border-right:none}
-      .why-item:nth-child(n){border-bottom:1px solid var(--border)}
+
+      /* CREDENTIALS STATS BAR */
+      .stats-bar{grid-template-columns:repeat(2,1fr)}
+      .stat-cell:nth-child(odd){border-right:1px solid var(--border)}
+      .stat-cell:nth-child(even){border-right:none}
+
+      /* WHY GRID */
+      .why-grid{grid-template-columns:1fr 1fr}
+      .why-item{border-right:none;border-bottom:1px solid var(--border)}
       .why-item:last-child{border-bottom:none}
-      .pa-grid{grid-template-columns:1fr}
-      .pa-item{border-right:none}
-      .pa-item:nth-child(n){border-bottom:1px solid var(--border)}
+
+      /* PRACTICE AREAS */
+      .pa-grid{grid-template-columns:1fr 1fr}
+      .pa-item{padding:28px 24px;border-right:none;border-bottom:1px solid var(--border)}
       .pa-item:last-child{border-bottom:none}
+      .pa-name{font-size:17px}
+
+      /* ABOUT */
       .about-layout{grid-template-columns:1fr;gap:48px}
+      .about-pull{font-size:18px}
+
+      /* INSIGHTS */
       .insights-grid{grid-template-columns:1fr}
+      .insight-title{font-size:16px}
+
+      /* CASE RESULTS */
+      .case-row{grid-template-columns:1fr}
+      .case-cell{padding:16px 20px;border-right:none;border-bottom:1px solid var(--border)}
+      .case-cell:last-child{border-bottom:none}
+      .case-ref{font-size:15px}
+      .case-col-body,.case-outcome{font-size:13px}
+
+      /* TESTIMONIALS */
+      .testi-grid{grid-template-columns:1fr 1fr}
+      .testi-quote{font-size:15px}
+
+      /* CONTACT */
+      .contact-wrap{grid-template-columns:1fr}
+      .contact-left{padding:52px 24px}
+      .contact-right{padding:52px 24px}
+      .contact-left .sec-title{font-size:32px}
+      .wa-main-btn{width:100%;justify-content:center}
+
+      /* FORM */
+      .form-row-2{grid-template-columns:1fr}
+      .form-input,.form-sel,.form-ta{font-size:16px}
+      .form-submit{width:100%}
+
+      /* FOOTER */
+      footer{padding:24px}
+      .footer-inner{flex-direction:column;text-align:center;gap:8px;padding:24px}
+
+      /* WA FLOAT BUTTON */
+      .wa-float{width:52px;height:52px;border-radius:50%;padding:0}
+      .wa-float-lbl{display:none}
+
+      /* TYPOGRAPHY */
+      .sec-title{font-size:clamp(28px,7vw,40px)}
+      .why-title{font-size:14px}
+      .pa-name{font-size:17px}
+      .about-pull{font-size:17px}
+      .insight-title{font-size:16px}
+      .testi-quote{font-size:15px}
+    }
+    @media(max-width:600px){
+      /* STATS BAR */
+      .stats-bar{grid-template-columns:1fr 1fr}
+      .stat-cell{border-right:none;border-bottom:1px solid var(--border)}
+      .stat-cell:last-child{border-bottom:none}
+      .stat-n{font-size:22px}
+      .stat-cell:nth-child(2n-1){border-right:none}
+      .stat-cell:nth-child(2n){border-right:none}
+
+      .hero-stat-row{grid-template-columns:1fr 1fr}
+      .hero-stat-cell{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
+      .hero-stat-cell:last-child{border-bottom:none}
+
+      /* WHY GRID */
+      .why-grid{grid-template-columns:1fr}
+      .why-item{border-right:none;border-bottom:1px solid var(--border)}
+      .why-item:last-child{border-bottom:none}
+
+      /* PRACTICE AREAS */
+      .pa-grid{grid-template-columns:1fr}
+      .pa-item{border-right:none;border-bottom:1px solid var(--border)}
+      .pa-item:last-child{border-bottom:none}
+
+      /* INSIGHTS */
+      .insights-grid{grid-template-columns:1fr}
+
+      /* CASE RESULTS */
       .case-row{grid-template-columns:1fr}
       .case-cell{border-right:none;border-bottom:1px solid var(--border)}
       .case-cell:last-child{border-bottom:none}
+
+      /* TESTIMONIALS */
       .testi-grid{grid-template-columns:1fr}
+
+      /* CONTACT */
       .contact-wrap{grid-template-columns:1fr}
-      .contact-left{padding:60px 24px}
-      .contact-right{padding:60px 24px}
-      .footer{padding:24px}
-      .footer-inner{flex-direction:column;text-align:center;gap:6px}
-      .wa-float-lbl{display:none}
-      .wa-float{padding:0;width:56px;height:56px}
+      .contact-left{padding:52px 16px}
+      .contact-right{padding:52px 16px}
+
+      /* FORM */
       .form-row-2{grid-template-columns:1fr}
-    }
-    @media(max-width:600px){
-      .stats-bar{grid-template-columns:1fr}
-      .stat-cell{border-right:none;border-bottom:1px solid var(--border)}
-      .stat-cell:last-child{border-bottom:none}
-      .hero-stat-row{grid-template-columns:1fr}
-      .hero-stat-cell{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06)}
-      .hero-stat-cell:last-child{border-bottom:none}
+      .form-input,.form-sel,.form-ta{font-size:16px}
+      .form-submit{width:100%}
+
+      /* SECTION PADDING */
+      .sec{padding:52px 16px}
+
+      /* TYPOGRAPHY */
+      .sec-title{font-size:clamp(28px,7vw,40px)}
+      .why-title{font-size:14px}
+      .pa-name{font-size:17px}
+      .about-pull{font-size:17px}
+      .insight-title{font-size:16px}
+      .testi-quote{font-size:15px}
+
+      /* OVERFLOW SAFETY */
+      h1,h2,h3,p,li,span{word-break:break-word;overflow-wrap:break-word}
+
+      /* MODALS */
+      .contact-box{width:calc(100% - 32px);padding:28px 20px}
+      .contact-input{font-size:16px}
     }
 
     /* ── MODALS ── */
